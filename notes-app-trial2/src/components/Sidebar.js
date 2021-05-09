@@ -1,6 +1,6 @@
 import React from "react";
 
-function Sidebar({notes, addHandler}){
+function Sidebar({notes, addHandler, deleteHandler, activeNote, setActiveNote}){
 
     return <div className="app-sidebar">
             <div className="app-sidebar-header">
@@ -10,10 +10,11 @@ function Sidebar({notes, addHandler}){
             
             <div className="app-sidebar-notes">
                 {notes.map((note) => (
-                    <div className="app-sidebar-note">
+                    <div className={`app-sidebar-note ${note.id === activeNote && "active"}`} 
+                    onClick= {() => setActiveNote(note.id)}>
                     <div className="sidebar-note-title">
                     <strong>{note.title}</strong>
-                    <button>Delete</button>
+                    <button onClick={() => deleteHandler(note.id)}>Delete</button>
                     </div>
                     <p>{note.body && note.body.substr(0 , 100) + "..."}</p>
 
